@@ -173,6 +173,12 @@ class hyperdb extends wpdb {
 	var $default_lag_threshold = null;
 
 	/**
+	 * MySQL is used as the database engine
+	 * @var bool
+	 */
+	var $is_mysql = true;
+
+	/**
 	 * Gets ready to make database connections
 	 * @param array db class vars
 	 */
