@@ -33,7 +33,7 @@ if ( defined('DB_CONFIG_FILE') && file_exists( DB_CONFIG_FILE ) ) {
 }
 
 /**
- * Common definitions 
+ * Common definitions
  */
 define( 'HYPERDB_LAG_OK', 1 );
 define( 'HYPERDB_LAG_BEHIND', 2 );
@@ -191,7 +191,7 @@ class hyperdb extends wpdb {
 	function hyperdb( $args = null ) {
 		return $this->__construct($args);
 	}
-	
+
 	/**
 	 * Sets $this->charset and $this->collate
 	 */
@@ -235,7 +235,7 @@ class hyperdb extends wpdb {
 
 	/**
 	 * Add a callback to a group of callbacks.
-	 * The default group is 'dataset', used to examine 
+	 * The default group is 'dataset', used to examine
 	 * queries and determine dataset.
 	 */
 	function add_callback( $callback, $group = 'dataset' ) {
@@ -345,7 +345,7 @@ class hyperdb extends wpdb {
 	 */
 	function db_connect( $query = '' ) {
 		$connect_function = $this->persistent ? 'mysql_pconnect' : 'mysql_connect';
-		
+
 		if ( empty( $query ) )
 			return false;
 
@@ -470,7 +470,7 @@ class hyperdb extends wpdb {
 				break;
 			}
 
-			if ( isset( $conn['queries'] ) ) 
+			if ( isset( $conn['queries'] ) )
 				++$conn['queries'];
 			else
 				$conn['queries'] = 1;
@@ -500,7 +500,7 @@ class hyperdb extends wpdb {
 
 			if ( !$tries_remaining = count( $servers ) ) 
 				return $this->bail("No database servers were found to match the query. ($this->table, $dataset)");
-			
+
 			if ( !isset( $unique_servers ) )
 				$unique_servers = $tries_remaining;
 
@@ -512,8 +512,8 @@ class hyperdb extends wpdb {
 			$success = false;
 
 			foreach ( $servers as $group_key ) {
-				--$tries_remaining;	
-	
+				--$tries_remaining;
+
 				// If all servers are lagged, we need to start ignoring the lag and retry
 				if ( count( $unique_lagged_slaves ) == $unique_servers )
 					break;
@@ -577,7 +577,7 @@ class hyperdb extends wpdb {
 				if ( $use_master || !$tries_remaining || !$this->check_tcp_responsiveness
 					|| true === $tcp = $this->check_tcp_responsiveness($host, $port, $timeout) )
 				{
-					$this->dbhs[$dbhname] = @ $connect_function( "$host:$port", $user, $password, true );	
+					$this->dbhs[$dbhname] = @ $connect_function( "$host:$port", $user, $password, true );
 				} else {
 					$this->dbhs[$dbhname] = false;
 				}
@@ -635,7 +635,7 @@ class hyperdb extends wpdb {
 			}
 
 			if ( !$success || !isset($this->dbhs[$dbhname]) || !is_resource( $this->dbhs[$dbhname] ) ) {
-				if ( !isset( $ignore_slave_lag ) && count( $unique_lagged_slaves ) ) { 
+				if ( !isset( $ignore_slave_lag ) && count( $unique_lagged_slaves ) ) {
 					// Lagged slaves were not used. Ignore the lag for this connection attempt and retry.
 					$ignore_slave_lag = true;
 					$tries_remaining = count( $servers );
@@ -658,7 +658,7 @@ class hyperdb extends wpdb {
 			break;
 		} while ( true );
 
-		if ( !isset( $charset ) ) 
+		if ( !isset( $charset ) )
 			$charset = null;
 
 		if ( !isset( $collate ) )
@@ -1002,11 +1002,9 @@ class hyperdb extends wpdb {
 	}
 
 	// Helper functions for configuration
-	
+
 } // class hyperdb
 
 $wpdb = new hyperdb();
 
 require( DB_CONFIG_FILE );
-
-?>
