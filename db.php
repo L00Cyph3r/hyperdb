@@ -181,13 +181,6 @@ class hyperdb extends wpdb {
 	var $dbhname_heartbeats = array();
 
 	/**
-	 * Triggers __construct() for backwards compatibility with PHP4
-	 */
-	function hyperdb( $args = null ) {
-		return $this->__construct($args);
-	}
-
-	/**
 	 * Gets ready to make database connections
 	 * @param array db class vars
 	 */
@@ -200,6 +193,13 @@ class hyperdb extends wpdb {
 		$this->use_mysqli = $this->should_use_mysqli();
 
 		$this->init_charset();
+	}
+
+	/**
+	 * Triggers __construct() for backwards compatibility with PHP4
+	 */
+	function hyperdb( $args = null ) {
+		return $this->__construct($args);
 	}
 
 	/**
@@ -1292,6 +1292,18 @@ class hyperdb extends wpdb {
 			return @mysql_fetch_field( $result );
 
 		return @mysqli_fetch_field( $result );
+	}
+
+	function ex_mysql_fetch_assoc( $result ) {
+		if ( ! $this->use_mysqli )
+			return mysql_fetch_assoc( $result );
+
+		if ( ! $this->is_mysql_result( $result ) )
+			return false;
+
+		$object = mysqli_fetch_assoc( $result );
+
+		return ! is_null( $object ) ? $object : false;
 	}
 
 	function ex_mysql_fetch_object( $result ) {
