@@ -74,6 +74,9 @@ Since HyperDB attempts a connection only when a query is made, your WordPress in
 
 == Changelog ==
 
+= Next =
+* Fixed wrong return value for `CREATE`, `ALTER`, `TRUNCATE` and `DROP` queries
+
 = 1.1 =
 * Extended callbacks functionality
 * Added connection error callback
