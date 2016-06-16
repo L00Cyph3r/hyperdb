@@ -726,7 +726,7 @@ class hyperdb extends wpdb {
 		if ( ! $this->has_cap( 'collation', $dbh ) || empty( $charset ) )
 			return;
 
-		if ( ! in_array( strtolower( $charset ), array( 'utf8', 'latin1' ) ) )
+		if ( ! in_array( strtolower( $charset ), array( 'utf8', 'utf8mb4', 'latin1' ) ) )
 			wp_die( "$charset charset isn't supported in HyperDB for security reasons" );
 
 		if ( $this->is_mysql_set_charset_callable() && $this->has_cap( 'set_charset', $dbh ) ) {
