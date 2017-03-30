@@ -875,7 +875,9 @@ class hyperdb extends wpdb {
 			return false;
 		}
 
-		if ( preg_match('/^\s*(insert|delete|update|replace|alter)\s/i',$query) ) {
+		if ( preg_match( '/^\s*(create|alter|truncate|drop)\s/i', $query ) ) {
+			$return_val = $this->result;
+		} elseif ( preg_match('/^\s*(insert|delete|update|replace|alter)\s/i',$query) ) {
 			$this->rows_affected = $this->ex_mysql_affected_rows( $this->dbh );
 
 			// Take note of the insert_id
