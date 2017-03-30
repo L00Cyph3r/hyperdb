@@ -181,6 +181,12 @@ class hyperdb extends wpdb {
 	var $dbhname_heartbeats = array();
 
 	/**
+	 * MySQL is used as the database engine
+	 * @var bool
+	 */
+	var $is_mysql = true;
+
+	/**
 	 * Gets ready to make database connections
 	 * @param array db class vars
 	 */
