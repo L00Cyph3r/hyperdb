@@ -658,6 +658,8 @@ class hyperdb extends wpdb {
 				$success = false;
 				$this->last_connection = compact('dbhname', 'host', 'port', 'user', 'name', 'tcp', 'elapsed', 'success');
 				$this->db_connections[] = $this->last_connection;
+				/*
+				Hide errors please
 				$msg = date( "Y-m-d H:i:s" ) . " Can't select $dbhname - \n";
 				$msg .= "'referrer' => '{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}',\n";
 				$msg .= "'server' => {$server},\n";
@@ -668,6 +670,7 @@ class hyperdb extends wpdb {
 				$msg .= "'lagged_status' => " . ( isset( $lagged_status ) ? $lagged_status : HYPERDB_LAG_UNKNOWN );
 
 				$this->print_error( $msg );
+				*/
 			}
 
 			if ( ! $success || ! isset( $this->dbhs[$dbhname] ) || ! $this->is_mysql_connection( $this->dbhs[$dbhname] ) ) {
